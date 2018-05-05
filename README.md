@@ -19,7 +19,7 @@ php composer.phar require --prefer-dist egor260890/yii2-feedback-module "*"
 ```$xslt
 composer update
 ```
-Выполяем миграции
+Выполнить миграции
 ```
 yii migrate --migrationPath=@egor260890/feedback/migrations/
 ```

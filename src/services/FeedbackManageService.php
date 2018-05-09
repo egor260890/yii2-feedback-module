@@ -90,15 +90,7 @@ class FeedbackManageService implements ObservableInterface
     }
 
     public function findModel($id){
-        if (($feedback = $this->feedbacks->get($id)) !== null) {
-            return $feedback;
-        } else {
-            throw new NotFoundHttpException('The requested feedback does not exist.');
-        }
-    }
-
-    public function setEmail($email){
-        $this->email=$email;
+        return $this->feedbacks->get($id);
     }
 
     public function attachMany($observers){
@@ -110,12 +102,12 @@ class FeedbackManageService implements ObservableInterface
                     $this->attachMany(call_user_func($observer));
                     continue;
                 }
-                $this->attach(is_object($observer)?$observer:$observer::getInstance());
+                $this->attach(is_object($observer)?$observer:$this->createInstance($observer));
             }
         }else if(is_subclass_of($observers,FeedbackObserverInterface::class)){
-            $this->attach(is_object($observer)?$observer:$observers::getInstance());
+            $this->attach(is_object($observers)?$observers:$this->createInstance($observers));
         } else{
-            throw new \RuntimeException('Observers not implement FeedbackObserverInterface');
+            throw new \RuntimeException('observer not implement FeedbackObserverInterface');
         }
     }
 
@@ -127,11 +119,13 @@ class FeedbackManageService implements ObservableInterface
 
     public function detach(FeedbackObserverInterface $observer,bool $compareByClassName=false)
     {
-        for ($i=count($this->feedbackObservables);$i>=0;$i--){
-            if ($compareByClassName?$this->feedbackObservables[$i]==$observer:$this->feedbackObservables[$i]===$observer){
-                unset($this->feedbackObservables[$i]);
+        array_walk($this->feedbackObservables,function($element,$key) use ($observer,$compareByClassName){
+            if ($compareByClassName?$element==$observer:$element===$observer){
+                unset($this->feedbackObservables[$key]);
+                $this->detach($observer,$compareByClassName);
+                return;
             }
-        }
+        });
     }
 
     public function notify(FeedbackInterface $feedback)
@@ -140,4 +134,15 @@ class FeedbackManageService implements ObservableInterface
             $observable->update($feedback);
         }
     }
+
+    private function createInstance(string $classname)
+    {
+        try {
+            $class = new \ReflectionClass($classname);
+        }catch (\ReflectionException $exception){
+            throw new \RuntimeException('observer not implement FeedbackObserverInterface');
+        }
+        return $class->newInstance();
+    }
+
 }

@@ -1,0 +1,7 @@
+suite_namespace: egor260890\feedback\tests\unit
+actor: UnitTester
+modules:
+    enabled:
+        - Yii2:
+            part: [orm, email, fixtures]
+        - Asserts

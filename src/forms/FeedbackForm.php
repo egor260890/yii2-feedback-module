@@ -37,6 +37,9 @@ class FeedbackForm extends Model
         if($feedback){
             $this->name=$feedback->name;
             $this->tel=$feedback->tel;
+            $this->email=$feedback->email;
+            $this->message=$feedback->message;
+            $this->company_name=$feedback->company_name;
             $this->status=$feedback->status;
         }else{
             $this->status=Feedback::STATUS_UNREVIEWED;

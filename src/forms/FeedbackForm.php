@@ -23,8 +23,6 @@ class FeedbackForm extends Model
     private $company_name;
 
     private $rules=[
-        [['name'], 'required'],
-        [['tel'], 'required'],
         [['tel','company_name'], 'string'],
         //['tel',PhoneValidator::class],
         [['name','email'],'string','max'=>100],

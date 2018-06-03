@@ -94,6 +94,9 @@ class FeedbackManageService implements ObservableInterface
     }
 
     public function attachMany($observers){
+        if (!$observers){
+            return false;
+        }
         if ($observers instanceof \Closure){
             $this->attachMany(call_user_func($observers));
         }else if (is_array($observers)){

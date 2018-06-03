@@ -18,7 +18,7 @@ class SendController extends \yii\web\Controller
 
     public function __construct($id, Module $module,FeedbackManageService $service, array $config = [])
     {
-        $service->attachMany(\Yii::$app->getModule('feedback-send')->observers);
+        $service->attachMany(\Yii::$app->getModule('feedback-send')->observers?:null);
         $this->request=\Yii::$app->request;
         $this->service=$service;
         parent::__construct($id, $module, $config);

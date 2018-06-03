@@ -13,7 +13,7 @@ $(document).on('pjax:complete', function() {
     });
 });
 $(function () {
-    $("#del-btn,#draft-btn,#activate-btn").on('click',function() {
+    $("#del-btn-feedback,#draft-btn-feedback,#activate-btn-feedback").on('click',function() {
         var url=$(this).data('url');
         if ($(this).attr('id')=='del-btn'&&!confirm('Подтвердите удаление')){return;}
          ajaxSend(url);

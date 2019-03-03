@@ -16,6 +16,6 @@ class Module extends \yii\base\Module
 
     public $defaultRoute='send';
 
-    public $observers='lsls';
+    public $observers=null;
 
 }

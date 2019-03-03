@@ -14,7 +14,7 @@ function registerFeedbackForm(id) {
             success: function(res){
                 console.log(res);
                 $(this)[0].reset();
-                $("#modal-1").modal('show');
+                $('#'+id).trigger('send.feedback');
             },
             error: function(err){
                 console.log(err);

@@ -1,7 +1,7 @@
 <?php
 
 
-use kartik\grid\GridView;
+use yii\grid\GridView;
 use kartik\date\DatePicker;
 use yii\widgets\Pjax;
 use egor260890\feedback\helpers\FeedbackHelper;
@@ -57,8 +57,7 @@ $this->params['breadcrumbs'][] ='Обратная связь'
                 'template'=>'{view} {delete}'
             ],
             [
-                'class' => '\kartik\grid\CheckboxColumn',
-                'rowHighlight'=>false
+                'class' => '\yii\grid\CheckboxColumn',
             ]
         ],
     ]); ?>

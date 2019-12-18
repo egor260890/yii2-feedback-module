@@ -12,6 +12,10 @@ class m180408_070030_create_feedback_table extends Migration
      */
     public function safeUp()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable('{{%feedback}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(),
@@ -21,7 +25,7 @@ class m180408_070030_create_feedback_table extends Migration
             'message'=>'MEDIUMTEXT',
             'created_date' => $this->integer(),
             'status'=>$this->tinyInteger()->defaultValue(0)
-        ]);
+        ], $tableOptions);
     }
 
     /**

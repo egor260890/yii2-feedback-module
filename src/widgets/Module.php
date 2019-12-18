@@ -1,6 +1,5 @@
 <?php
 namespace egor260890\feedback\widgets;
-use egor260890\feedback\widgets\assets\Assets;
 
 /**
  * Created by PhpStorm.
@@ -14,8 +13,8 @@ class Module extends \yii\base\Module
 
     public $controllerNamespace = 'egor260890\feedback\widgets\controllers';
 
-    public $defaultRoute='send';
+    public $defaultRoute = 'send';
 
-    public $observers=null;
+    public $observers = null;
 
 }
